@@ -23,10 +23,14 @@ const countdown = function () {
   const secondsLeft = Math.floor((totalSeconds)) % 60;                                  //removed minutes
 
   daysEl.innerHTML = daysLeft;
-  hoursEl.innerHTML = hoursLeft;
-  minutesEl.innerHTML = minutesLeft;
-  secondsEl.innerHTML = secondsLeft;
+  hoursEl.innerHTML = formatTime(hoursLeft);
+  minutesEl.innerHTML = formatTime(minutesLeft);
+  secondsEl.innerHTML = formatTime(secondsLeft);
 }
+
+const formatTime = function(time){
+  return (time < 10) ? `0${time}` : time;
+} 
 
 countdown();
 
