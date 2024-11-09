@@ -1,35 +1,62 @@
-const fs = require('fs'); //fs module is used to interacting with file system.
+//read a file using promises
 
-fs.readFile('./file4.txt', cb);
+const fs = require('fs');
+const fileData = fs.promises.readFile('file1.txt'); //promise will either resolve (returning file content), or it returns an error(returinign error message.)
 
-function cb(err, data){
-  if(err){
-    console.log(err);
+// fileData.then(function (data) {
+//   console.log(`${data}`);
+// }).catch(function (err) {
+//   console.log(err);
+// }
+// );
+
+
+const promiseReadFile1 = fs.promises.readFile('file1.txt');
+const promiseReadFile2 = fs.promises.readFile('file2.txt');
+const promiseReadFile3 = fs.promises.readFile('file3.txt');
+
+//Files will be printed in RANDOM Order 
+
+promiseReadFile1.then((data) => {
+  console.log('file 1 data:-' + data);
+}).catch(function (err) {
+  console.log(`error message: ${err}`);
+});
+
+promiseReadFile2.then((function (data) {
+  console.log('file 2 data:- ' + data);
+})).catch(function (err) {
+  console.log('error message:- ' + err);
+});
+
+promiseReadFile3.then(function (data) {
+  console.log(`file 3 details:- ${data}`);
+}).catch(
+  function (err) {
+    console.log(`error: ${err}`);
   }
-  console.log(data);
-}
+);
 
-// const file1Data = fs.readFileSync('./file1.txt');
-// const file2Data = fs.readFileSync('./file2.txt');
-// const file3Data = fs.readFileSync('./file3.txt');
+//Files will be printed in Serial Order using CHAINING.
 
-// console.log('start');
-
-// setTimeout(() => {
-//   console.log(`file 1 details:- ${file1Data}`);
-// }, 1000);
-
-// setTimeout(()=>{
-//   console.log(`file 2 details:- ${file2Data}`);
-// }, 1000);
-
-// setTimeout(()=>{
-//   console.log(`file 3 details:- ${file3Data}`);
-// }, 1000);
-
-// console.log('end');
+// promiseReadFile1.then(function (data1) {
+//   console.log(`file 1 details:- ${data1}`);
+//   promiseReadFile2.then(function (data2) {
+//     console.log(`file 2 details:- ${data2}`);
+//     promiseReadFile3.then(function (data3) {
+//       console.log(`file 3 details:- ${data3}`);
+//     })
+//   })
+// }
+// )
 
 
-
-
- 
+promiseReadFile1.then(function (data1) {
+  console.log(`file 1 details:- ${data1}`);
+  return promiseReadFile2;
+}).then(function (data2) {
+  console.log(`file 2 details:- ${data2}`);
+  return promiseReadFile3;
+}).then(function (data3) {
+  console.log(`file 3 details: ${data3}`);
+})

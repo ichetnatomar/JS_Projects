@@ -88,8 +88,8 @@ let removeGarbage = function (message) {
 
 let icecreamTreat = function (message) {
   return new Promise(function (resolve, reject) {
-    
-    resolve('then won icecream.');    
+
+    resolve('then won icecream.');
   }
   );
 };
@@ -107,7 +107,7 @@ cleanRoom().then(function (message) {
 }).then(function (message) {
   console.log('finished, ' + message);
 }).catch(
-  function(error){
+  function (error) {
     console.log(error);
   }
 );
