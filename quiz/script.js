@@ -49,7 +49,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 loadQuiz();
 
-function loadQuiz () {
+function loadQuiz() {
   deselectAll();
 
   const currentQuestionData = data[currentQuestionIndex];
@@ -62,7 +62,7 @@ function loadQuiz () {
 
 }
 
-function getSelected () {
+function getSelected() {
   let answer = undefined;
 
   answerEls.forEach((answerEl) => {
@@ -74,9 +74,7 @@ function getSelected () {
   return answer;
 }
 
-
-
-function deselectAll () {
+function deselectAll() {
   answerEls.forEach((answerEl) => {
     answerEl.checked = false;
   });
