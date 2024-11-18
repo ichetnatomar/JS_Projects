@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>double button</title>
+</head>
+
+<body>
+  <button id="double-btn">double</button>
+  <script>
+    //Step 1: access the double button
+    const doubleBtn = document.querySelector('#double-btn');
+
+    //Step 2: fire an event on clicking this button
+    doubleBtn.addEventListener('click', function (e) {
+      //Step 3: make 2 buttons and append them to double-btn's parent element
+      const firstBtn = document.createElement('button');
+      firstBtn.innerText = 'First Button';
+
+      const secondBtn = document.createElement('button');
+      secondBtn.innerText = 'Second Button';
+      
+      e.target.parentElement.appendChild(firstBtn);
+      e.target.parentElement.appendChild(secondBtn);
+
+      //Step 4: remove double btn
+      e.target.remove();
+     })
+
+  </script>
+
+</body>
+
+</html>
