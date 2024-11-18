@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book My Show</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      /* background-color: aqua; */
+    }
+
+    h1 {
+      padding: 0.5rem;
+    }
+
+    main {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    #genres {
+      width: 8rem;
+    }
+
+    .tickets {
+      /* background-color: azure; */
+      border: 20px;
+      border-color: black;
+      width: 200px;
+      height: 200px;
+      margin: 1rem;
+    }
+
+    .heading {
+      background-color: black;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 25%;
+      width: 100%;
+
+    }
+
+    .ticket-heading {
+      color: white;
+      font-size: 1.3rem;
+    }
+
+    .ticket-body {
+      background-color: orange;
+      height: 75%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pricing {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+
+
+
+<body>
+
+  <header>
+    <h1>BOOK MY SHOW</h1>
+    <select name="genres" id="genres">
+      <option value="none">None</option>
+      <option value="action">Action</option>
+      <option value="romance">Romance</option>
+      <option value="comedy">Comedy</option>
+    </select>
+  </header>
+
+  <main>
+
+    <!-- 1st ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Action Movie - 1</h3>
+      </div>
+
+      <div class="ticket-body">
+        <p class="pricing" data-category="action">Rs. 100</p>
+      </div>
+    </div>
+
+
+    <!-- 2nd Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Action Movie - 2</h3>
+      </div>
+      <div class="ticket-body">
+        <p class="pricing" data-category="action">Rs. 200</p>
+      </div>
+    </div>
+
+
+    <!-- 3rd Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Action Movie - 3</h3>
+      </div>
+
+      <div class="ticket-body">
+        <p class="pricing" data-category="action">Rs. 150</p>
+      </div>
+    </div>
+
+
+    <!-- 4th Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Romance - 1</h3>
+      </div>
+      <div class="ticket-body">
+        <p class="pricing" data-category="romance">Rs. 200</p>
+      </div>
+    </div>
+
+    <!-- 5th Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Romance - 2</h3>
+      </div>
+      <div class="ticket-body">
+        <p class="pricing" data-category="romance">RS 150</p>
+      </div>
+    </div>
+
+
+    <!-- 6th Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Romance - 3</h3>
+      </div>
+      <div class="ticket-body">
+        <p class="pricing" data-category="romance">RS. 150</p>
+      </div>
+    </div>
+
+    <!-- 7th Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Action - 4</h3>
+      </div>
+      <div class="ticket-body">
+        <p class="pricing" data-category="action">RS. 200</p>
+      </div>
+    </div>
+
+    <!-- 8th Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Comedy - 1</h3>
+      </div>
+      <div class="ticket-body">
+        <p class="pricing" data-category="comedy">RS. 100</p>
+      </div>
+    </div>
+
+    <!-- 9th Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Romance - 4</h3>
+      </div>
+      <div class="ticket-body">
+        <p class="pricing" data-category="romance">RS. 100</p>
+      </div>
+    </div>
+
+    <!-- 10th Ticket -->
+    <div class="tickets">
+      <div class="heading">
+        <h3 class="ticket-heading">Comedy - 2</h3>
+      </div>
+      <div class="ticket-body">
+        <p class="pricing" data-category="comedy">RS. 200</p>
+      </div>
+    </div>
+  </main>
+
+</body>
+
+</html>

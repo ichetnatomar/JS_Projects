@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks</title>
+</head>
+
+<body>
+  <button id="remove-btn">Remove All</button>
+
+  <ul id="tasksId">
+    <li id="task1Id">
+      <p>Task-1</p>
+      <button class="delete-btn">delete</button>
+    </li>
+
+    <li id="task2Id">
+      <p>Task-2</p>
+      <button class="delete-btn">delete</button>
+    </li>
+
+    <li id="task3Id">
+      <p>Task-3</p>
+      <button class="delete-btn">delete</button>
+    </li>
+
+    <li id="task4Id">
+      <p>Task-4</p>
+      <button class="delete-btn">delete</button>
+    </li>
+  </ul>
+
+  <script>
+
+    //delete all tasks at once using remove button.
+
+    const removeBtn = document.querySelector('#remove-btn');
+
+    removeBtn.addEventListener('click', function (e) {
+
+      e.target.parentElement.querySelector('#tasksId').remove();
+
+      const messageDiv = document.createElement('div');
+
+      messageDiv.innerText = 'All tasks removed.';
+
+      removeBtn.parentElement.appendChild(messageDiv);
+
+      removeBtn.remove();
+
+    });
+
+    //delete individual tasks.
+
+    const deleteButtons = document.querySelectorAll('.delete-btn');
+
+    for (let y = 0; y < deleteButtons.length; y++) {
+
+      deleteButtons[y].addEventListener('click', function (e) {
+
+        e.target.parentElement.remove();
+      })
+    }
+
+  </script>
+
+</body>
+
+</html>
