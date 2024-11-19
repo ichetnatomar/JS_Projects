@@ -198,6 +198,47 @@
         <p class="pricing" data-category="comedy">RS. 200</p>
       </div>
     </div>
+
+    <script>
+      //on selecting any option from dropdown, it should give those movies. only. on sleectimng none, it shiuld give all movies
+
+      //access the select element
+      const dropDown = document.querySelector('select');
+      //access all the movies 
+
+
+
+      dropDown.addEventListener('change', function () {
+        const selectedValue = dropDown.value;
+
+        let allMovieTickets = document.querySelectorAll('.pricing');
+
+
+        for (let x = 0; x < allMovieTickets.length; x++) {
+
+          console.log(allMovieTickets);
+
+          if(selectedValue == 'none'){
+            allMovieTickets[x].parentElement.parentElement.style.display = 'block';
+          }
+
+          else if (allMovieTickets[x].getAttribute('data-category') == selectedValue) {
+
+            allMovieTickets[x].parentElement.parentElement.style.display = 'block';
+          }
+          else {
+            allMovieTickets[x].parentElement.parentElement.style.display = 'none';
+
+          }
+
+
+
+
+
+        }
+      })
+
+    </script>
   </main>
 
 </body>
