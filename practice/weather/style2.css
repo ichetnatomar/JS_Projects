@@ -72,4 +72,5 @@ nav form {
   background-color: #4ECDC4;
   font-size: 1.1rem;
   border: none;
+  cursor: pointer;
 }

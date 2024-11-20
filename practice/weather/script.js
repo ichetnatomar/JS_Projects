@@ -1,22 +1,16 @@
-console.log('hello');
+async function getWeatherInfo() {
+  try {
+    
+    const url = 'http://api.weatherapi.com/v1/current.json?key=0b50e3f195ad4a2cb76102322241911&q=bangalore&aqi=no'; //url to fetch data from API
 
-const toys = {
+    const data = await fetch(url, {                                   //fetch() will gwt data form url.
+      mode: 'cors',                                                   // Default value
+    });
+    console.log(data.json());                                        //data cannot be read directly, it os converted to json
+  } 
+  catch (error) {
+    console.error('cannot get data');
+  }
+}
 
-  toy1: {
-    name: 'tofu',
-    type: 'stuff',
-    price: 300,
-  },
-  toy2: {
-    name: 'bunny',
-    type: 'stuff',
-    price: 500,
-  },
-};
-
-const toysJson = JSON.stringify(toys);
-const toysBackToObj = JSON.parse(toysJson);
-
-console.log("toys obj: "+toys);
-console.log("toys json: "+toysJson);
-console.log("toys back to object from json:"+toysBackToObj);
+getWeatherInfo();
