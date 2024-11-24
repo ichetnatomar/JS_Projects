@@ -13,3 +13,5 @@ const rootElement = document.querySelector('#root'); //eleemnt with id = root ac
 const root = ReactDOM.createRoot(rootElement); //root element created in reactdom
 root.render(div); //div appended inside root
 console.log(div);
+
+
