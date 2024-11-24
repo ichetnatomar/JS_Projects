@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  overflow: hidden;
+  /* height: 100vh; */
+}
+
+.toolbox-cont {
+  height: 10vh;
+  background-color: rgb(103, 103, 103);
+  padding: 1rem;
+  display: flex;
+}
+
+.toolbox-filter-colors {
+  height: 3rem;
+  width: 20rem;
+  background-color: rgb(57, 57, 57);
+  margin-left: 1.5rem;
+  padding: 0.4rem;
+  border-radius: 7px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.toolbox-filter-color {
+  width: 20%;
+  margin: 0.2rem;
+  background-color: pink;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.filter-color-1 {
+  background-color: #4285F4;
+}
+
+.filter-color-2 {
+  background-color: #DB4437;
+}
+
+.filter-color-3 {
+  background-color: #F4B400;
+}
+
+.filter-color-4 {
+  background-color: #0F9D58;
+}
+
+.filter-color-1:hover {
+  background-color: #0061fc;
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: white;
+}
+
+.filter-color-2:hover {
+  background-color: #fa1500;
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: white;
+}
+
+.filter-color-3:hover {
+  background-color: #ffca39;
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: white;
+}
+
+.filter-color-4:hover {
+  background-color: #00ff84;
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: white;
+}
+
+.toolbox-cont-select {
+  height: 3rem;
+  width: 8rem;
+  background-color: rgb(57, 57, 57);
+  margin-left: 2rem;
+  border-radius: 7px;
+  display: flex;
+}
+
+.toolbox-cont-select>* {
+  width: 400%;
+  padding: 10%;
+  color: azure;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
+.toolbox-cont-select>*:hover {
+  background-color: rgb(6, 255, 89);
+}
+
+
+
+/* Modal Window Design  */
+
+.modal-cont {
+  background-color: rgb(69, 69, 69);
+  height: 50vh;
+  width: 50vw;
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  display: none;
+}
+
+.text-area {
+  height: 100%;
+  width: 80%;
+  resize: none;
+  background-color: #dfe4ea;
+}
+
+.priority-color-cont {
+  height: 100%;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.priority-color {
+  height: 3.3rem;
+  width: 57%;
+}
+
+.priority-color:hover {
+  cursor: pointer;
+}
+
+/* Main container  */
+
+.main-cont {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Ticket Structure */
+
+.ticket-cont {
+  background-color: yellow;
+  width: 20%;
+  height: 25%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-header {
+  width: 100%;
+  height: 10%;
+  background-color: #c7efcf;
+}
+
+.ticket-title {
+  width: 100%;
+  height: 20%;
+  background-color: #ffeaa5;
+}
+
+.ticket-description {
+  width: 100%;
+  height: 70%;
+  background-color: #fe5f55;
+}
+
+.ticket-lock {
+  font-size: 1.4rem;
+  position: relative;
+  top: 78%;
+  left: 91%;
+}
