@@ -14,6 +14,4 @@ const root = ReactDOM.createRoot(rootElement); //root element created in reactdo
 root.render(div); //div appended inside root
 console.log(div);
 
-//test
-
 
