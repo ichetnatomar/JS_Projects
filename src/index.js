@@ -27,17 +27,55 @@ console.log(resultEle);
 
 
 
+
+//write a function that prints a message once span fro line 35 morningEle is clicked
+
+//Tradionatl Function Declaration
+// function clickMessage() { 
+//   console.log('I was clicked'); 
+// }
+
+
+//Function Expression
+// const clickMessage = function(){
+//   console.log('I was clicked'); 
+// }
+
+//Es6 Arrow functions
+// const clickMessage = ()=>{
+//   console.log("I was clicked");
+// }
+
+//even consise Es6 arrow function
+const clickMessage = (message) => console.log(`message: ${message}`);
+
+
+
+
+
 //another example
-const isMorning = false;
+const isMorning = true;
 const morningMsg = "Good morning";
 const afternoonMsg = "Good afternoon";
 
-const morningEle = <div>{morningMsg}, <p>it is 7am.</p> </div>
+
+// These below will work
+// const morningEle = <div>{morningMsg}, <span onClick={clickMessage}>it is 7am.</span> </div>
+// const morningEle = <div>{morningMsg}, <span onClick={()=>console.log("I was clicked from inside arrow function")}>It is 6 am.</span></div>
+const morningEle = <div>{morningMsg}<span onClick={() => clickMessage("I was clicked.")}>. It is 6 am.</span></div>
+
+
+// This wont work, as the function call got encountered and executed thena nd there
+// const morningEle = <div>{morningMsg}, <span onClick={clickMessage("I was clicked..")}>It is 5 am.</span></div>
+
 const afternoonEle = <div>{afternoonMsg}, it is 2pm.</div>
 const messageEle = (isMorning) ? morningEle : afternoonEle;
 
-// root.render(messageEle);
-// console.log(messageEle);
+root.render(messageEle);
+console.log(messageEle);
+
+
+
 
 
 
@@ -52,17 +90,15 @@ const GreetingMessage = function () {
   return <div>
     {messageEle}
     I am inside Component;
-    </div>
+  </div>
 
-    //or no need for extrra div also, just use fragments
-    // return <>
-    // messageEle;
-    // I am inside Component.
-    // </>
+  //or no need for extrra div also, just use fragments
+  // return <>
+  // messageEle;
+  // I am inside Component.
+  // </>
 
 }
 
 // root.render(greetingMessage());
-root.render(<GreetingMessage></GreetingMessage>);
-
-//incase you 
+// root.render(<GreetingMessage></GreetingMessage>);
