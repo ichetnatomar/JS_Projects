@@ -28,7 +28,7 @@ console.log(resultEle);
 
 
 //another example
-const isMorning = true;
+const isMorning = false;
 const morningMsg = "Good morning";
 const afternoonMsg = "Good afternoon";
 
@@ -36,5 +36,33 @@ const morningEle = <div>{morningMsg}, <p>it is 7am.</p> </div>
 const afternoonEle = <div>{afternoonMsg}, it is 2pm.</div>
 const messageEle = (isMorning) ? morningEle : afternoonEle;
 
-root.render(messageEle);
-console.log(messageEle);
+// root.render(messageEle);
+// console.log(messageEle);
+
+
+
+
+//Functional components: egular Functions that return a react element
+// In the above example, instead of passing the react elemenr in line 39, lets try passing using a functional component
+
+const GreetingMessage = function () {
+  // return messageEle + "I am inside component.";                        //you cannot do this, simce messageEle is a eact element object, not a string. On doing like    this, type coersion happens, and entire thing gets converted to some awke=ward string, which cannot be accepted by render()method as it is expecting a REACT element.
+
+  // instead use this
+  return <div>
+    {messageEle}
+    I am inside Component;
+    </div>
+
+    //or no need for extrra div also, just use fragments
+    // return <>
+    // messageEle;
+    // I am inside Component.
+    // </>
+
+}
+
+// root.render(greetingMessage());
+root.render(<GreetingMessage></GreetingMessage>);
+
+//incase you 
