@@ -29,7 +29,11 @@ console.log(resultEle);
 
 
 //write a function that prints a message once span fro line 35 morningEle is clicked
+<<<<<<< HEAD
 //OLD SC
+=======
+
+>>>>>>> e2adab73a00e755afd651c00ac4b9c0968a53d63
 //Tradionatl Function Declaration
 // function clickMessage() { 
 //   console.log('I was clicked'); 
