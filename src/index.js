@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './style.css';
+import App from './App'; //goto line 104 to ckeck imports
+
 
 // This below 4 lines are verbose, we can also do the same thinbgs using jsx.
 // const child1 = React.createElement('p', {className: 'color'}, "I am child 1"); //p child created
@@ -29,11 +31,6 @@ console.log(resultEle);
 
 
 //write a function that prints a message once span fro line 35 morningEle is clicked
-<<<<<<< HEAD
-//OLD SC
-=======
-
->>>>>>> e2adab73a00e755afd651c00ac4b9c0968a53d63
 //Tradionatl Function Declaration
 // function clickMessage() { 
 //   console.log('I was clicked'); 
@@ -80,10 +77,6 @@ console.log(messageEle);
 
 
 
-
-
-
-
 //Functional components: egular Functions that return a react element
 // In the above example, instead of passing the react elemenr in line 39, lets try passing using a functional component
 
@@ -104,5 +97,7 @@ const GreetingMessage = function () {
 
 }
 
-// root.render(greetingMessage());
-// root.render(<GreetingMessage></GreetingMessage>);
+
+root.render(<GreetingMessage></GreetingMessage>);
+// root.render(App);
+

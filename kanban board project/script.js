@@ -5,7 +5,7 @@ const addBtn = document.querySelector('.add-btn');
 let isModalOn = false;
 const textElement = document.querySelector('.text-area');
 const mainContainerElement = document.querySelector('.main-cont');
-let ticketIid = 0;
+
 
 
 //generate a ticket
@@ -28,8 +28,7 @@ function createTicket() {
 
   //pouplating info into the ticket
   const ticketHeaderElement = ticketElement.querySelector('.ticket-header');
-  ticketHeaderElement.innerText = ++ticketIid;
-
+  ticketHeaderElement.innerText = (Math.random() * 10000).toFixed(0);
   //populate ticket's descrption with modal windows' text area content
   ticketElement.querySelector('.ticket-description').innerText = modalWindowElement.querySelector('.text-area').value;
 
