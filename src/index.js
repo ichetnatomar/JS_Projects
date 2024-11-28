@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './style.css';
-import App from './App'; //goto line 104 to ckeck imports
+import App from './App.js'; //goto line 104 to ckeck imports
 
 
 // This below 4 lines are verbose, we can also do the same thinbgs using jsx.
@@ -98,6 +98,6 @@ const GreetingMessage = function () {
 }
 
 
-root.render(<GreetingMessage></GreetingMessage>);
-// root.render(App);
+// root.render(<GreetingMessage></GreetingMessage>);
+root.render(<App/>);
 

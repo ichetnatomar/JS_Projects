@@ -2,17 +2,17 @@
 const modalWindowElement = document.querySelector('.modal-cont');
 const removeBtn = document.querySelector('.trash-btn');
 const addBtn = document.querySelector('.add-btn');
-let isModalOn = false;
 const textElement = document.querySelector('.text-area');
 const mainContainerElement = document.querySelector('.main-cont');
 const priorityColorElements = document.querySelectorAll('.priority-color');
+const trashIconElement = document.querySelector('.fa-solid, .fa-trash');
+const toolboxColors = document.querySelectorAll('.toolbox-filter-color');
+let toolboxColorClass = null;
+
+
+let isModalOn = false;
 let ticketColorClass = 'filter-color-1';
-
-
-
-
-
-
+let isTrashOn = false;
 
 
 //generate a ticket
@@ -43,9 +43,7 @@ function createTicket() {
 
   ticketElement.querySelector('.ticket-header').classList.add(ticketColorClass);
 
-  console.log(ticketElement.querySelector('.ticket-header').classList);
-
-  ticketColorClass = 'filter-color-1';
+  ticketColorClass = 'filter-color-1'; //setting back the deafult value
 
   //remove modal pop-up window once its corresponding ticket is generated
   removeModalPopup();
@@ -121,10 +119,6 @@ priorityColorElements.forEach((priorityColorElement) => {
 
     priorityColorElement.classList.add('chosen-color-border');
 
-    //once color is chosen, save it for ticket's header
-    // ticketColor = (window.getComputedStyle(priorityColorElement).backgroundColor);
-
-
 
     //another way of accessing color, extract color class for element,
     priorityColorElement.classList.forEach(priorityColorElementClass => {
@@ -151,5 +145,77 @@ priorityColorElements.forEach((priorityColorElement) => {
 //     e.target.classList.add('chosen-color-border');
 //   }
 // });
+
+
+
+
+//activate trash button
+
+const trashElement = document.querySelector('.trash-btn');
+
+trashElement.addEventListener('click', () => {
+
+  isTrashOn = !isTrashOn;
+  console.log(isTrashOn);
+
+  if (isTrashOn) {
+    trashIconElement.style.color = '#000000'; //change trash color to black
+    trashElement.style.backgroundColor = '#FA0533'; //change bg color to red
+    alert("Delete button has been activated.");
+  }
+
+  else {
+    trashIconElement.style.color = "azure";
+    trashElement.style.backgroundColor = 'rgb(57, 57, 57)';
+  }
+
+});
+
+
+
+//delete a ticket
+document.addEventListener('click', (e) => {
+  if (isTrashOn) {
+    e.target.parentElement.classList.forEach(parentClass => {
+      if (parentClass.match('ticket-cont')) {
+        // console.log('ticket caught!');
+        e.target.parentElement.remove();
+      }
+    })
+  }
+});
+
+
+
+
+//select a toolbox color and filter all tickets of that color
+toolboxColors.forEach(toolboxColor => {
+  toolboxColor.addEventListener('click', () => {
+    toolboxColorClass = toolboxColor.classList[1];
+    let allTicketsElements = document.querySelectorAll('.ticket-cont');
+    
+    //for each ticket check, if its header class has chose color
+    allTicketsElements.forEach(ticket => {
+      if (ticket.children[0].classList.contains(toolboxColorClass)) {
+        ticket.style.display = 'flex';
+      }
+      else {
+        ticket.style.display = 'none';
+      }
+
+
+    })
+  })
+})
+
+
+
+
+
+
+
+
+
+
 
 
