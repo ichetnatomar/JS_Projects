@@ -17,10 +17,8 @@ let isTrashOn = false;
 
 //generate a ticket
 function createTicket() {
-
   const ticketElement = document.createElement('div');
   ticketElement.classList.add('ticket-cont');
-
   ticketElement.innerHTML = `  
     <div class="ticket-header"></div>
       <div class="ticket-title"></div>
@@ -30,7 +28,6 @@ function createTicket() {
         </div>
       </div>
    `;
-
   mainContainerElement.appendChild(ticketElement);
 
   //populating info into the ticket
@@ -39,19 +36,12 @@ function createTicket() {
 
   //populate ticket's descrption with modal windows' text area content
   ticketElement.querySelector('.ticket-description').innerText = modalWindowElement.querySelector('.text-area').value;
-
-
   ticketElement.querySelector('.ticket-header').classList.add(ticketColorClass);
-
   ticketColorClass = 'filter-color-1'; //setting back the deafult value
 
   //remove modal pop-up window once its corresponding ticket is generated
   removeModalPopup();
 }
-
-
-
-
 
 
 
@@ -64,38 +54,26 @@ function removeModalPopup() {
 
 
 
-
-
-
-
 //on clicking the plus button, pop-up a modal window
 addBtn.addEventListener('click', function () {
-
   if (isModalOn) {     //if modal window is already there, then remove it, and make flag false
     modalWindowElement.style.display = 'none';
     isModalOn = false;
-
   }
   else {               //if modal window is not there, then pop it up, and make flag true
     modalWindowElement.style.display = 'flex';
     textElement.innerText = "";
     isModalOn = true;
   }
-
-
 });
 
 
 
 
-
-
-
-
 //write tasks 
-modalWindowElement.addEventListener('keydown', function (e) {
-  const key = e.key;
-  if (key == 'Shift') {
+
+document.addEventListener('keydown', function (e) {
+  if (e.key == 'Shift' && isModalOn) {
     //call a function that creates a fresh ticket for each task
     createTicket();
   }
@@ -104,21 +82,14 @@ modalWindowElement.addEventListener('keydown', function (e) {
 
 
 
-
-
-
 //on clicking color, show highlight
 //Using querSelectorAll
 priorityColorElements.forEach((priorityColorElement) => {
-
   priorityColorElement.addEventListener('click', () => {
-
     priorityColorElements.forEach((colorElement) => {
       colorElement.classList.remove('chosen-color-border');
     });
-
     priorityColorElement.classList.add('chosen-color-border');
-
 
     //another way of accessing color, extract color class for element,
     priorityColorElement.classList.forEach(priorityColorElementClass => {
@@ -126,9 +97,6 @@ priorityColorElements.forEach((priorityColorElement) => {
         ticketColorClass = priorityColorElementClass;
       }
     });
-
-    console.log(ticketColorClass);
-
   });
 });
 
@@ -150,26 +118,20 @@ priorityColorElements.forEach((priorityColorElement) => {
 
 
 //activate trash button
-
 const trashElement = document.querySelector('.trash-btn');
-
 trashElement.addEventListener('click', () => {
-
   isTrashOn = !isTrashOn;
-  console.log(isTrashOn);
-
   if (isTrashOn) {
     trashIconElement.style.color = '#000000'; //change trash color to black
     trashElement.style.backgroundColor = '#FA0533'; //change bg color to red
     alert("Delete button has been activated.");
   }
-
   else {
     trashIconElement.style.color = "azure";
     trashElement.style.backgroundColor = 'rgb(57, 57, 57)';
   }
-
 });
+
 
 
 
@@ -193,17 +155,15 @@ toolboxColors.forEach(toolboxColor => {
   toolboxColor.addEventListener('click', () => {
     toolboxColorClass = toolboxColor.classList[1];
     let allTicketsElements = document.querySelectorAll('.ticket-cont');
-    
+
     //for each ticket check, if its header class has chose color
     allTicketsElements.forEach(ticket => {
       if (ticket.children[0].classList.contains(toolboxColorClass)) {
-        ticket.style.display = 'flex';
+        ticket.style.display = 'block';
       }
       else {
         ticket.style.display = 'none';
       }
-
-
     })
   })
 })
