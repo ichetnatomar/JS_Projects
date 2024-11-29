@@ -7,12 +7,9 @@ const mainContainerElement = document.querySelector('.main-cont');
 const priorityColorElements = document.querySelectorAll('.priority-color');
 const trashIconElement = document.querySelector('.fa-solid, .fa-trash');
 const toolboxColors = document.querySelectorAll('.toolbox-filter-color');
-let toolboxColorArray = [];
 
-toolboxColors.forEach(toolboxColor => {
-  toolboxColorArray.push(toolboxColor.classList[1]);
-})
-console.log(toolboxColorArray);
+//this array is used to change ticket's color when its color band gets clicked
+const toolboxColorArray = ['filter-color-1', 'filter-color-2', 'filter-color-3', 'filter-color-4'];
 
 let toolboxColorClass = null;
 let isModalOn = false;
@@ -46,6 +43,7 @@ function createTicket() {
 
   //remove modal pop-up window once its corresponding ticket is generated
   removeModalPopup();
+  handleColor(ticketElement); //when a ticket is created, a handlecolor() function is binded to it.
 }
 
 
@@ -180,30 +178,56 @@ toolboxColors.forEach(toolboxColor => {
 
 
 
+function handleColor(ticketElement) {
+  const ticketHeaderElement = ticketElement.querySelector('.ticket-header');
 
-//if you click on header of any ticket, its color changes
-
-document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('ticket-header')) {
-    const ticketColorClass = e.target.classList[1];
-    let ticketColorPosition = -1;
-
-    //check at which index lies your tickets's color
+  //when this ticket header is clicked, its color is changed to next color
+  ticketHeaderElement.addEventListener('click', () => {
+    const ticketHeaderColor = ticketHeaderElement.classList[1]; //ticket color
+    let ticketHeaderColorIndex = -1;
+    //check ticket color lies in which index of toolboxColorArray
     for (let i = 0; i < toolboxColorArray.length; i++) {
-      if (toolboxColorArray[i] == ticketColorClass) {
-        ticketColorPosition = i;
-        break;
-      }
-    }
-    //go over toolboxColorArray, skip that index, and chnage ticket's color to next index, i = (i+1)%n
-    for (let i = 0; i < toolboxColorArray.length; i++) {
-      if (i == ticketColorPosition) {
-        ticketColorPosition = (ticketColorPosition + 1) % (toolboxColorArray.length);
+      if (toolboxColorArray[i] == ticketHeaderColor) {
+        ticketHeaderColorIndex = i;
         break;
       }
     }
 
-    e.target.classList.remove(ticketColorClass);
-    e.target.classList.add(toolboxColorArray[ticketColorPosition]);
-  }
-})
+    for (let i = 0; i < toolboxColorArray.length; i++) {
+      if (i == ticketHeaderColorIndex) {
+        ticketHeaderColorIndex = (ticketHeaderColorIndex + 1) % (toolboxColorArray.length);
+        ticketHeaderElement.classList.remove(ticketHeaderColor);
+        ticketHeaderElement.classList.add(toolboxColorArray[ticketHeaderColorIndex]);
+        break;
+      }
+    }
+  })
+
+  //if you click on header of any ticket, its color changes
+
+  // document.addEventListener('click', (e) => {
+  //   if (e.target.classList.contains('ticket-header')) {
+  //     const ticketColorClass = e.target.classList[1];
+  //     let ticketColorPosition = -1;
+
+  //     //check at which index lies your tickets's color
+  //     for (let i = 0; i < toolboxColorArray.length; i++) {
+  //       if (toolboxColorArray[i] == ticketColorClass) {
+  //         ticketColorPosition = i;
+  //         break;
+  //       }
+  //     }
+  //     //go over toolboxColorArray, skip that index, and chnage ticket's color to next index, i = (i+1)%n
+  //     for (let i = 0; i < toolboxColorArray.length; i++) {
+  //       if (i == ticketColorPosition) {
+  //         ticketColorPosition = (ticketColorPosition + 1) % (toolboxColorArray.length);
+  //         break;
+  //       }
+  //     }
+
+  //     e.target.classList.remove(ticketColorClass);
+  //     e.target.classList.add(toolboxColorArray[ticketColorPosition]);
+  //   }
+  // })
+
+}
