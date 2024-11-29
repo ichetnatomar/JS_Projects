@@ -7,9 +7,14 @@ const mainContainerElement = document.querySelector('.main-cont');
 const priorityColorElements = document.querySelectorAll('.priority-color');
 const trashIconElement = document.querySelector('.fa-solid, .fa-trash');
 const toolboxColors = document.querySelectorAll('.toolbox-filter-color');
+let toolboxColorArray = [];
+
+toolboxColors.forEach(toolboxColor => {
+  toolboxColorArray.push(toolboxColor.classList[1]);
+})
+console.log(toolboxColorArray);
+
 let toolboxColorClass = null;
-
-
 let isModalOn = false;
 let ticketColorClass = 'filter-color-1';
 let isTrashOn = false;
@@ -45,12 +50,10 @@ function createTicket() {
 
 
 
-
 function removeModalPopup() {
   modalWindowElement.style.display = 'none';
   isModalOn = false;
 }
-
 
 
 
@@ -70,8 +73,7 @@ addBtn.addEventListener('click', function () {
 
 
 
-//write tasks 
-
+//write tasks
 document.addEventListener('keydown', function (e) {
   if (e.key == 'Shift' && isModalOn) {
     //call a function that creates a fresh ticket for each task
@@ -83,7 +85,7 @@ document.addEventListener('keydown', function (e) {
 
 
 //on clicking color, show highlight
-//Using querSelectorAll
+//Using querySelectorAll
 priorityColorElements.forEach((priorityColorElement) => {
   priorityColorElement.addEventListener('click', () => {
     priorityColorElements.forEach((colorElement) => {
@@ -100,7 +102,6 @@ priorityColorElements.forEach((priorityColorElement) => {
   });
 });
 
-
 //doing above this using event delegation method, instead of forEach
 
 // document.addEventListener('click', function (e) {
@@ -113,6 +114,7 @@ priorityColorElements.forEach((priorityColorElement) => {
 //     e.target.classList.add('chosen-color-border');
 //   }
 // });
+
 
 
 
@@ -150,6 +152,7 @@ document.addEventListener('click', (e) => {
 
 
 
+
 //select a toolbox color and filter all tickets of that color
 toolboxColors.forEach(toolboxColor => {
   toolboxColor.addEventListener('click', () => {
@@ -166,16 +169,41 @@ toolboxColors.forEach(toolboxColor => {
       }
     })
   })
+  //on dbl-click any toolbox color, all tickets should be visible again
+  toolboxColor.addEventListener('dblclick', () => {
+    let allTicketsElements = document.querySelectorAll('tickt-cont');
+    allTicketsElements.forEach(ticketEle => {
+      ticketEle.style.display = 'block';
+    })
+  })
 })
 
 
 
 
+//if you click on header of any ticket, its color changes
 
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('ticket-header')) {
+    const ticketColorClass = e.target.classList[1];
+    let ticketColorPosition = -1;
 
+    //check at which index lies your tickets's color
+    for (let i = 0; i < toolboxColorArray.length; i++) {
+      if (toolboxColorArray[i] == ticketColorClass) {
+        ticketColorPosition = i;
+        break;
+      }
+    }
+    //go over toolboxColorArray, skip that index, and chnage ticket's color to next index, i = (i+1)%n
+    for (let i = 0; i < toolboxColorArray.length; i++) {
+      if (i == ticketColorPosition) {
+        ticketColorPosition = (ticketColorPosition + 1) % (toolboxColorArray.length);
+        break;
+      }
+    }
 
-
-
-
-
-
+    e.target.classList.remove(ticketColorClass);
+    e.target.classList.add(toolboxColorArray[ticketColorPosition]);
+  }
+})
