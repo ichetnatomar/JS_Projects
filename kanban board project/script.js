@@ -1,3 +1,7 @@
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css';
+document.head.appendChild(link);
 
 const modalWindowElement = document.querySelector('.modal-cont');
 const removeBtn = document.querySelector('.trash-btn');
@@ -24,12 +28,15 @@ function createTicket() {
   ticketElement.innerHTML = `  
     <div class="ticket-header"></div>
       <div class="ticket-title"></div>
-      <div class="ticket-description">
-        <div class="ticket-lock">
-          <i class="fa-solid fa-lock"></i>
-        </div>
-      </div>
+      <div class="ticket-description"></div>
+      <div class="ticket-lock">
+        <i class="fa-solid fa-lock"></i>
+      </div>      
    `;
+
+  const ticketDescriptionElement = ticketElement.querySelector('.ticket-description');
+  const lockElement = ticketElement.querySelector('.ticket-lock').parentElement;
+
   mainContainerElement.appendChild(ticketElement);
 
   //populating info into the ticket
@@ -41,9 +48,17 @@ function createTicket() {
   ticketElement.querySelector('.ticket-header').classList.add(ticketColorClass);
   ticketColorClass = 'filter-color-1'; //setting back the deafult value
 
-  //remove modal pop-up window once its corresponding ticket is generated
-  removeModalPopup();
+
+  removeModalPopup();  //remove modal pop-up window once its corresponding ticket is generated
+
   handleColor(ticketElement); //when a ticket is created, a handlecolor() function is binded to it.
+
+  // handleLock(ticketElement);
+
+  handleLock2(ticketElement);
+
+  deleteTicket(ticketElement); //delete ticket when trash button is activated, and that ticket is clicked 
+
 }
 
 
@@ -52,6 +67,7 @@ function removeModalPopup() {
   modalWindowElement.style.display = 'none';
   isModalOn = false;
 }
+
 
 
 
@@ -116,19 +132,23 @@ priorityColorElements.forEach((priorityColorElement) => {
 
 
 
-
 //activate trash button
 const trashElement = document.querySelector('.trash-btn');
 trashElement.addEventListener('click', () => {
   isTrashOn = !isTrashOn;
   if (isTrashOn) {
-    trashIconElement.style.color = '#000000'; //change trash color to black
+    trashIconElement.style.color = 'black'; //change trash color to black
     trashElement.style.backgroundColor = '#FA0533'; //change bg color to red
+
     alert("Delete button has been activated.");
+    const allTickets = document.querySelectorAll('.ticket-cont');
+    allTickets.forEach(ticket => {
+      ticket.style.cursor = 'pointer';
+    })
   }
   else {
-    trashIconElement.style.color = "azure";
-    trashElement.style.backgroundColor = 'rgb(57, 57, 57)';
+    trashIconElement.style.color = 'azure';
+    trashElement.style.backgroundColor = 'rgb(6, 255, 89)';
   }
 });
 
@@ -136,17 +156,35 @@ trashElement.addEventListener('click', () => {
 
 
 //delete a ticket
-document.addEventListener('click', (e) => {
-  if (isTrashOn) {
-    e.target.parentElement.classList.forEach(parentClass => {
-      if (parentClass.match('ticket-cont')) {
-        // console.log('ticket caught!');
-        e.target.parentElement.remove();
-      }
+function deleteTicket(ticketElement) {
+  if(isTrashOn){
+    ticketElement.addEventListener('click', ()=>{
+      ticketElement.remove();
     })
   }
-});
+}
+// document.addEventListener('click', (e) => {
+//   if (isTrashOn) {
+//     e.target.parentElement.classList.forEach(parentClass => {
+//       if (parentClass.match('ticket-cont')) {
+//         e.target.parentElement.remove();
+//       }
+//     })
+//   }
+// });
 
+
+
+
+//on double-clicking any toolbox color, all tickets are displayed
+toolboxColors.forEach(toolboxColor => {
+  toolboxColor.addEventListener('dblclick', () => {
+    const allTicketsElements = document.querySelectorAll('.ticket-cont');
+    allTicketsElements.forEach(ticketEle => {
+      ticketEle.style.display = 'block';
+    })
+  })
+})
 
 
 
@@ -167,14 +205,8 @@ toolboxColors.forEach(toolboxColor => {
       }
     })
   })
-  //on dbl-click any toolbox color, all tickets should be visible again
-  toolboxColor.addEventListener('dblclick', () => {
-    let allTicketsElements = document.querySelectorAll('tickt-cont');
-    allTicketsElements.forEach(ticketEle => {
-      ticketEle.style.display = 'block';
-    })
-  })
 })
+
 
 
 
@@ -201,33 +233,45 @@ function handleColor(ticketElement) {
         break;
       }
     }
+
   })
+}
 
-  //if you click on header of any ticket, its color changes
 
-  // document.addEventListener('click', (e) => {
-  //   if (e.target.classList.contains('ticket-header')) {
-  //     const ticketColorClass = e.target.classList[1];
-  //     let ticketColorPosition = -1;
 
-  //     //check at which index lies your tickets's color
-  //     for (let i = 0; i < toolboxColorArray.length; i++) {
-  //       if (toolboxColorArray[i] == ticketColorClass) {
-  //         ticketColorPosition = i;
-  //         break;
-  //       }
-  //     }
-  //     //go over toolboxColorArray, skip that index, and chnage ticket's color to next index, i = (i+1)%n
-  //     for (let i = 0; i < toolboxColorArray.length; i++) {
-  //       if (i == ticketColorPosition) {
-  //         ticketColorPosition = (ticketColorPosition + 1) % (toolboxColorArray.length);
-  //         break;
-  //       }
-  //     }
 
-  //     e.target.classList.remove(ticketColorClass);
-  //     e.target.classList.add(toolboxColorArray[ticketColorPosition]);
-  //   }
-  // })
+//on clicking the lock, it opens, and closes toggle.
+function handleLock(ticketElement) {
+  const lockElement = ticketElement.querySelector('.ticket-lock');
+  const lockIconElement = lockElement.querySelector('.fa-lock');
+  let isLockToOpen = false;
+  lockElement.addEventListener('click', () => {
+    isLockToOpen = !isLockToOpen;
+    if (isLockToOpen) {
+      //lock should open
+      lockIconElement.classList.remove('fa-lock');
+      lockIconElement.classList.add('fa-lock-open');
+    }
+    else {
+      //lock should close
+      lockIconElement.classList.remove('fa-lock-open');
+      lockIconElement.classList.add('fa-lock');
+    }
+  })
+}
 
+//doing handle lock WITHOUT Flag
+function handleLock2(ticketElement) {
+  const lockElement = ticketElement.querySelector('.ticket-lock');
+  const lockElem = lockElement.childNodes[1];
+  lockElem.addEventListener('click', () => {
+    if (lockElem.classList.contains('fa-lock')) {
+      lockElem.classList.remove(lockElem.classList[1]);
+      lockElem.classList.add('fa-lock-open');
+    }
+    else {
+      lockElem.classList.remove(lockElem.classList[1]);
+      lockElem.classList.add('fa-lock');
+    }
+  })
 }
