@@ -8,10 +8,7 @@ const App = () => {
     console.log('clicked from parent');
   }
 
-  const data = 'data from App';
-
-  return <Button data = {data} /*clickAction = {handleClickAction}*/>Click me from App</Button> //children: Click me from App, another prop
-
+  return <Button data={{ a: { b: { c: 'c' } } }} clickAction={handleClickAction}>Click me from App</Button> //children: Click me from App, another prop
 
 }
 

@@ -7,10 +7,14 @@ const Button = (props) => {                                      //props catches
 
   const handleClick = () => {
     clickAction?.();                                             //Optional Chaining, if clickAcvtion is not passed from App, it exectes nothing
-    console.log(data);                                             //prop function sent from App is executed
+
   }
 
-  return <button onClick={handleClick}>{children}</button>
+  return <button onClick={handleClick}>                        //JSX
+    {children}
+    +
+    {data?.a?.d?.d}
+  </button>
 }
 
 export default Button;
