@@ -12,12 +12,12 @@ module.exports = {
     }),
   ],
   devServer: {
-    port: 3030, // you can change the port,
+    port: 3000, // you can change the port,
     historyApiFallback: true,
   },
   module: {
     rules: [
-      { //inside whole application except, node_modules, whenever you encounter .js or .jsx, use bable-loader to transpile code.
+      {
         test: /\.(js|jsx)$/, // .js and .jsx files
         exclude: /node_modules/, // excluding the node_modules folder
         use: {

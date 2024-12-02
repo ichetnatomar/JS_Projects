@@ -11,21 +11,21 @@ import App from './App.js'; //goto line 104 to ckeck imports
 // const div = React.createElement('div', {}, [child1, child2, child3]); //div created and child placed inside it
 
 
-const div = <div className='color'>hello2</div>
+// const div = <div className='color'>hello2</div>
 
 //access the root element from html, and then make a reactdom root element
 const rootElement = document.querySelector('#root'); //eleemnt with id = root accessed from html
 const root = ReactDOM.createRoot(rootElement); //root element created in reactdom
-root.render(div); //div appended inside root
-console.log(div);
+// root.render(div); //div appended inside root
+// console.log(div);
 
 //Conditionally render a component
 //lets say, if Math.random() < 0.5, you say: "heads", else "tails"
-const result = Math.random();
-const resultEle = <div>{(result <= 0.5) ? 'heads' : 'tails'}</div>; //react element
-root.render(resultEle);
-console.log(result);
-console.log(resultEle);
+// const result = Math.random();
+// const resultEle = <div>{(result <= 0.5) ? 'heads' : 'tails'}</div>; //react element
+// root.render(resultEle);
+// console.log(result);
+// console.log(resultEle);
 
 
 
@@ -48,46 +48,46 @@ console.log(resultEle);
 // }
 
 //even consise Es6 arrow function
-const clickMessage = (message) => console.log(`message: ${message}`);
+// const clickMessage = (message) => console.log(`message: ${message}`);
 
 
 
 
 
 //another example
-const isMorning = true;
-const morningMsg = "Good morning";
-const afternoonMsg = "Good afternoon";
+// const isMorning = true;
+// const morningMsg = "Good morning";
+// const afternoonMsg = "Good afternoon";
 
 
 // These below will work
 // const morningEle = <div>{morningMsg}, <span onClick={clickMessage}>it is 7am.</span> </div>
 // const morningEle = <div>{morningMsg}, <span onClick={()=>console.log("I was clicked from inside arrow function")}>It is 6 am.</span></div>
-const morningEle = <div>{morningMsg}<span onClick={() => clickMessage("I was clicked.")}>. It is 6 am.</span></div>
+// const morningEle = <div>{morningMsg}<span onClick={() => clickMessage("I was clicked.")}>. It is 6 am.</span></div>
 
 
 // This wont work, as the function call got encountered and executed thena nd there
 // const morningEle = <div>{morningMsg}, <span onClick={clickMessage("I was clicked..")}>It is 5 am.</span></div>
 
-const afternoonEle = <div>{afternoonMsg}, it is 2pm.</div>
-const messageEle = (isMorning) ? morningEle : afternoonEle;
+// const afternoonEle = <div>{afternoonMsg}, it is 2pm.</div>
+// const messageEle = (isMorning) ? morningEle : afternoonEle;
 
-root.render(messageEle);
-console.log(messageEle);
+// root.render(messageEle);
+// console.log(messageEle);
 
 
 
 //Functional components: egular Functions that return a react element
 // In the above example, instead of passing the react elemenr in line 39, lets try passing using a functional component
 
-const GreetingMessage = function () {
+// const GreetingMessage = function () {
   // return messageEle + "I am inside component.";                        //you cannot do this, simce messageEle is a eact element object, not a string. On doing like    this, type coersion happens, and entire thing gets converted to some awke=ward string, which cannot be accepted by render()method as it is expecting a REACT element.
 
   // instead use this
-  return <div>
-    {messageEle}
-    I am inside Component;
-  </div>
+  // return <div>
+  //   {messageEle}
+  //   I am inside Component;
+  // </div>
 
   //or no need for extrra div also, just use fragments
   // return <>
@@ -95,7 +95,7 @@ const GreetingMessage = function () {
   // I am inside Component.
   // </>
 
-}
+// }
 
 
 // root.render(<GreetingMessage></GreetingMessage>);
