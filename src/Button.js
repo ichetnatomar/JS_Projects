@@ -10,7 +10,8 @@ const Button = (props) => {                                      //props catches
 
   }
 
-  return <button onClick={handleClick}>                        //JSX
+  //JSX
+  return <button onClick={handleClick}>
     {children}
     +
     {data?.a?.d?.d}
