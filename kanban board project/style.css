@@ -142,6 +142,9 @@
   border-radius: 5px;
 
 }
+.ticket-cont:hover{
+  cursor: pointer;
+}
 
 .ticket-header {
   width: 100%;

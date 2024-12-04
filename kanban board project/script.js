@@ -11,6 +11,7 @@ const mainContainerElement = document.querySelector('.main-cont');
 const priorityColorElements = document.querySelectorAll('.priority-color');
 const trashIconElement = document.querySelector('.fa-solid, .fa-trash');
 const toolboxColors = document.querySelectorAll('.toolbox-filter-color');
+let localStorage = [];
 
 //this array is used to change ticket's color when its color band gets clicked
 const toolboxColorArray = ['filter-color-1', 'filter-color-2', 'filter-color-3', 'filter-color-4'];
@@ -46,19 +47,33 @@ function createTicket() {
   //populate ticket's descrption with modal windows' text area content
   ticketElement.querySelector('.ticket-description').innerText = modalWindowElement.querySelector('.text-area').value;
   ticketElement.querySelector('.ticket-header').classList.add(ticketColorClass);
-  ticketColorClass = 'filter-color-1'; //setting back the deafult value
+  ticketColorClass = 'filter-color-1'; //setting back to default value
 
+  //after a ticket is created and populated, add it to localStorage.
+  handleLocalStorage(ticketElement);
 
-  removeModalPopup();  //remove modal pop-up window once its corresponding ticket is generated
+  removeModalPopup();                       //remove modal pop-up window once its corresponding ticket is generated
 
-  handleColor(ticketElement); //when a ticket is created, a handlecolor() function is binded to it.
+  handleColor(ticketElement);               //when a ticket is created, a handlecolor() function is binded to it.
 
   // handleLock(ticketElement);
 
   handleLock2(ticketElement);
 
-  deleteTicket(ticketElement); //delete ticket when trash button is activated, and that ticket is clicked 
+  deleteTicket(ticketElement);              //delete ticket when trash button is activated, and that ticket is clicked 
 
+}
+
+function handleLocalStorage(ticketElement) {
+  const color = ticketElement.querySelector('.ticket-header').classList[1];
+  const id = ticketElement.querySelector('.ticket-title');
+  const task = ticketElement.querySelector('.ticket-description');
+  localStorage.push({color, id, task});
+
+  //Set local storage
+  // local
+
+  
 }
 
 
@@ -157,12 +172,14 @@ trashElement.addEventListener('click', () => {
 
 //delete a ticket
 function deleteTicket(ticketElement) {
-  if(isTrashOn){
-    ticketElement.addEventListener('click', ()=>{
+  ticketElement.addEventListener('click', () => {
+    if (isTrashOn) {
       ticketElement.remove();
-    })
-  }
+    }
+  })
 }
+
+
 // document.addEventListener('click', (e) => {
 //   if (isTrashOn) {
 //     e.target.parentElement.classList.forEach(parentClass => {
