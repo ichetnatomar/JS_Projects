@@ -11,7 +11,9 @@ const mainContainerElement = document.querySelector('.main-cont');
 const priorityColorElements = document.querySelectorAll('.priority-color');
 const trashIconElement = document.querySelector('.fa-solid, .fa-trash');
 const toolboxColors = document.querySelectorAll('.toolbox-filter-color');
+let savedTickets = [];
 let ticketsArr = [];
+// let ticketsArr = JSON.parse(localStorage.getItem('tickets'))||[]; //dont use this, many things will change. but see for locgic: used, incase you have any tickets from last session, picki them first, and the add new tickets. then there is no need to make a separate array saveTickets[]
 
 //this array is used to change ticket's color when its color band gets clicked
 const toolboxColorArray = ['filter-color-1', 'filter-color-2', 'filter-color-3', 'filter-color-4'];
@@ -24,27 +26,26 @@ let isTrashOn = false;
 
 //every time page refreshes, call init() that puuls tickte info from localStroarge, recreates and displays them.
 const init = () => {
-  const savedTickets = JSON.parse(localStorage.getItem('tickets')); //JSON string is parsed to normal object(in thi case array of obejcts)
+  savedTickets = JSON.parse(localStorage.getItem('tickets')); //JSON string is parsed to normal object(in thi case array of obejcts)
 
   if (savedTickets) {
     savedTickets.forEach((ticketObj) => {
-
-      // console.log(ticketObj);
       const id = ticketObj.id;
       const color = ticketObj.color;
       const task = ticketObj.task;
-      console.log(`${id},  ,${color},  ${task}`);
       createTicket(color, id, task);
     })
   }
-
 }
-
 init();
+
+
+
 
 
 //generate a ticket
 function createTicket(ticketColorClass, id, task) {
+
   const ticketElement = document.createElement('div');
   ticketElement.classList.add('ticket-cont');
   ticketElement.innerHTML = `   
@@ -85,22 +86,22 @@ function createTicket(ticketColorClass, id, task) {
 }
 
 function handleticketsArr(ticketElement) {
-  const color = ticketElement.querySelector('.ticket-header').classList[1];
-  const id = ticketElement.querySelector('.ticket-title').innerText;
-  const task = ticketElement.querySelector('.ticket-description').innerText;
+  const color = ticketElement.querySelector('.ticket-header').classList[1];  //extract color from ticket
+  const id = ticketElement.querySelector('.ticket-title').innerText;         //extract id from ticket
+  const task = ticketElement.querySelector('.ticket-description').innerText; //extract task from ticket
+
   const ticketObj = {
     'color': color,
     'id': id,
     'task': task,
   }
-  // ticketsArr.push({color, id, task});
+
   ticketsArr.push(ticketObj);
 
   //Set local storage
-
   localStorage.setItem('tickets', JSON.stringify(ticketsArr));
-
 }
+
 
 
 function removeModalPopup() {
@@ -257,35 +258,49 @@ toolboxColors.forEach(toolboxColor => {
 
 function handleColor(ticketElement) {
   const ticketHeaderElement = ticketElement.querySelector('.ticket-header');
+  let ticketHeaderColor = ticketHeaderElement.classList[1]; //access ticket color class
+  let ticketHeaderColorIndex = -1;
+
 
   //when this ticket header is clicked, its color is changed to next color
   ticketHeaderElement.addEventListener('click', () => {
-    const ticketHeaderColor = ticketHeaderElement.classList[1]; //ticket color
-    let ticketHeaderColorIndex = -1;
-    //check ticket color lies in which index of toolboxColorArray
-    for (let i = 0; i < toolboxColorArray.length; i++) {
-      if (toolboxColorArray[i] == ticketHeaderColor) {
-        ticketHeaderColorIndex = i;
-        break;
-      }
-    }
 
-    for (let i = 0; i < toolboxColorArray.length; i++) {
-      if (i == ticketHeaderColorIndex) {
-        ticketHeaderColorIndex = (ticketHeaderColorIndex + 1) % (toolboxColorArray.length);
-        ticketHeaderElement.classList.remove(ticketHeaderColor);
-        ticketHeaderElement.classList.add(toolboxColorArray[ticketHeaderColorIndex]);
-        break;
-      }
-    }
 
+    ticketHeaderColorIndex = toolboxColorArray.findIndex((color) => {       //find index of ticket' color in color array
+      return (ticketHeaderColor === color);
+    })
+
+    //increase the index by 1, 
+    console.log('earlier');
+    console.log('ticket color is: ' + ticketHeaderColor);
+    console.log('its on index: ' + ticketHeaderColorIndex);
+    ticketHeaderElement.classList.remove(ticketHeaderColor);
+
+    ticketHeaderColorIndex = (ticketHeaderColorIndex + 1) % (toolboxColorArray.length);
+    ticketHeaderColor = toolboxColorArray[ticketHeaderColorIndex];
+    ticketHeaderElement.classList.add(toolboxColorArray[ticketHeaderColorIndex]);
+
+    //upadte this new color inside ticket
+
+
+
+    console.log('ticket color is: ' + ticketHeaderColor);
+    console.log('its on index: ' + ticketHeaderColorIndex);
+
+    //this change in ticket's color property should also be persisited in local storage
+    //locate where in ticket array this modified ticket lies
+    const ticketIdx = getIdx(ticketElement.querySelector('.ticket-title').innerText); //access id
+    console.log('before: ', ticketsArr[ticketIdx]);
+    ticketsArr[ticketIdx].color = ticketHeaderColor;
+    console.log('after: ', ticketsArr[ticketIdx]);
+    updateLocalStorage();
   })
 }
 
 
 
 
-//on clicking the lock, it opens, and closes toggle.
+//on clicking the lock, it opens, and closes, toggle.
 function handleLock(ticketElement) {
   const lockElement = ticketElement.querySelector('.ticket-lock');
   const lockIconElement = lockElement.querySelector('.fa-lock');
@@ -319,4 +334,21 @@ function handleLock2(ticketElement) {
       lockElem.classList.add('fa-lock');
     }
   })
+}
+
+
+
+
+function getIdx(id) {
+  //go over ticketArr, and locate that ticket using id
+
+  const ticketIdx = ticketsArr.findIndex((ticket) => {
+    return ticket.id === id; //moment ticket id == id, return from there.
+  })
+  return ticketIdx;
+}
+
+//everytime ay chnage is made to ticktes, it is persisted inside localstorage
+function updateLocalStorage() {
+  localStorage.setItem('tickets', JSON.stringify(ticketsArr));
 }
