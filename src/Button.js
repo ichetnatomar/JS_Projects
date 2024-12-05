@@ -1,16 +1,18 @@
-import React from 'react';
+import React , {memo} from 'react';
+import Text  from './Text';
 
 
-const Button = (props) => {
+const Button = memo((props) => {
+  console.log('rendering Button');
+
   const { children, clickButton } = props;
 
-  const doSomething = ()=>{
-    console.log('button got clicked');
+  const doSomething = () => {
+    
     clickButton();
   }
-
-
+  
   return <button onClick={doSomething}>{children}</button>
-}
+})
 
 export default Button;

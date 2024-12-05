@@ -11,7 +11,7 @@ const mainContainerElement = document.querySelector('.main-cont');
 const priorityColorElements = document.querySelectorAll('.priority-color');
 const trashIconElement = document.querySelector('.fa-solid, .fa-trash');
 const toolboxColors = document.querySelectorAll('.toolbox-filter-color');
-let localStorage = [];
+let ticketsArr = [];
 
 //this array is used to change ticket's color when its color band gets clicked
 const toolboxColorArray = ['filter-color-1', 'filter-color-2', 'filter-color-3', 'filter-color-4'];
@@ -22,11 +22,32 @@ let ticketColorClass = 'filter-color-1';
 let isTrashOn = false;
 
 
+//every time page refreshes, call init() that puuls tickte info from localStroarge, recreates and displays them.
+const init = () => {
+  const savedTickets = JSON.parse(localStorage.getItem('tickets')); //JSON string is parsed to normal object(in thi case array of obejcts)
+
+  if (savedTickets) {
+    savedTickets.forEach((ticketObj) => {
+
+      // console.log(ticketObj);
+      const id = ticketObj.id;
+      const color = ticketObj.color;
+      const task = ticketObj.task;
+      console.log(`${id},  ,${color},  ${task}`);
+      createTicket(color, id, task);
+    })
+  }
+
+}
+
+init();
+
+
 //generate a ticket
-function createTicket() {
+function createTicket(ticketColorClass, id, task) {
   const ticketElement = document.createElement('div');
   ticketElement.classList.add('ticket-cont');
-  ticketElement.innerHTML = `  
+  ticketElement.innerHTML = `   
     <div class="ticket-header"></div>
       <div class="ticket-title"></div>
       <div class="ticket-description"></div>
@@ -42,47 +63,50 @@ function createTicket() {
 
   //populating info into the ticket
   const ticketTitleElement = ticketElement.querySelector('.ticket-title');
-  ticketTitleElement.innerText = (Math.random() * 10000).toFixed(0);
+  ticketTitleElement.innerText = id;  //assign id to ticket
 
   //populate ticket's descrption with modal windows' text area content
-  ticketElement.querySelector('.ticket-description').innerText = modalWindowElement.querySelector('.text-area').value;
-  ticketElement.querySelector('.ticket-header').classList.add(ticketColorClass);
+  ticketElement.querySelector('.ticket-description').innerText = task;
+
+  ticketElement.querySelector('.ticket-header').classList.add(ticketColorClass); //assign color thats chose after clickking on priorty colors 
   ticketColorClass = 'filter-color-1'; //setting back to default value
 
-  //after a ticket is created and populated, add it to localStorage.
-  handleLocalStorage(ticketElement);
+
+  handleticketsArr(ticketElement);          //after a ticket is created and populated, add it to ticketsArr.
 
   removeModalPopup();                       //remove modal pop-up window once its corresponding ticket is generated
 
   handleColor(ticketElement);               //when a ticket is created, a handlecolor() function is binded to it.
 
-  // handleLock(ticketElement);
-
-  handleLock2(ticketElement);
+  handleLock2(ticketElement);               //handle lock of the ticket
 
   deleteTicket(ticketElement);              //delete ticket when trash button is activated, and that ticket is clicked 
 
 }
 
-function handleLocalStorage(ticketElement) {
+function handleticketsArr(ticketElement) {
   const color = ticketElement.querySelector('.ticket-header').classList[1];
-  const id = ticketElement.querySelector('.ticket-title');
-  const task = ticketElement.querySelector('.ticket-description');
-  localStorage.push({color, id, task});
+  const id = ticketElement.querySelector('.ticket-title').innerText;
+  const task = ticketElement.querySelector('.ticket-description').innerText;
+  const ticketObj = {
+    'color': color,
+    'id': id,
+    'task': task,
+  }
+  // ticketsArr.push({color, id, task});
+  ticketsArr.push(ticketObj);
 
   //Set local storage
-  // local
 
-  
+  localStorage.setItem('tickets', JSON.stringify(ticketsArr));
+
 }
-
 
 
 function removeModalPopup() {
   modalWindowElement.style.display = 'none';
   isModalOn = false;
 }
-
 
 
 
@@ -106,7 +130,10 @@ addBtn.addEventListener('click', function () {
 document.addEventListener('keydown', function (e) {
   if (e.key == 'Shift' && isModalOn) {
     //call a function that creates a fresh ticket for each task
-    createTicket();
+    // pass values of color, id and description with it
+    const id = (Math.random() * 10000).toFixed(0);
+    const task = modalWindowElement.querySelector('.text-area').value;
+    createTicket(ticketColorClass, id, task);
   }
 });
 
@@ -114,12 +141,13 @@ document.addEventListener('keydown', function (e) {
 
 
 //on clicking color, show highlight
-//Using querySelectorAll
 priorityColorElements.forEach((priorityColorElement) => {
+
   priorityColorElement.addEventListener('click', () => {
     priorityColorElements.forEach((colorElement) => {
       colorElement.classList.remove('chosen-color-border');
     });
+
     priorityColorElement.classList.add('chosen-color-border');
 
     //another way of accessing color, extract color class for element,
