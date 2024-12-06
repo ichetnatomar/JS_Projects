@@ -203,7 +203,17 @@ trashElement.addEventListener('click', () => {
 function deleteTicket(ticketElement) {
   ticketElement.addEventListener('click', () => {
     if (isTrashOn) {
+      //remove ticket from ticketarray
+      const ticketId = ticketElement.querySelector('.ticket-title').innerText;
+
+      //once you know id. search it inside ticketarray and delete it
+      const ticketIdx = getIdx(ticketId);
+
+      ticketsArr.splice(ticketIdx, 1);
+
       ticketElement.remove();
+
+      updateLocalStorage();
     }
   })
 }
@@ -270,10 +280,7 @@ function handleColor(ticketElement) {
       return (ticketHeaderColor === color);
     })
 
-    //increase the index by 1, 
-    console.log('earlier');
-    console.log('ticket color is: ' + ticketHeaderColor);
-    console.log('its on index: ' + ticketHeaderColorIndex);
+    //increase the index by 1,
     ticketHeaderElement.classList.remove(ticketHeaderColor);
 
     ticketHeaderColorIndex = (ticketHeaderColorIndex + 1) % (toolboxColorArray.length);
@@ -282,17 +289,10 @@ function handleColor(ticketElement) {
 
     //upadte this new color inside ticket
 
-
-
-    console.log('ticket color is: ' + ticketHeaderColor);
-    console.log('its on index: ' + ticketHeaderColorIndex);
-
     //this change in ticket's color property should also be persisited in local storage
     //locate where in ticket array this modified ticket lies
     const ticketIdx = getIdx(ticketElement.querySelector('.ticket-title').innerText); //access id
-    console.log('before: ', ticketsArr[ticketIdx]);
     ticketsArr[ticketIdx].color = ticketHeaderColor;
-    console.log('after: ', ticketsArr[ticketIdx]);
     updateLocalStorage();
   })
 }
