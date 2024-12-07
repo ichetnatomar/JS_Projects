@@ -209,7 +209,15 @@ function deleteTicket(ticketElement) {
       //once you know id. search it inside ticketarray and delete it
       const ticketIdx = getIdx(ticketId);
 
-      ticketsArr.splice(ticketIdx, 1);
+      ticketsArr.splice(ticketIdx, 1);  //1 ticket counting from ticketidx was spliced from ticketsArr
+
+      //using filter()
+      // ticketsArr = ticketsArr.filter((ticketObj)=>{
+
+      //   let ans = ticketObj.id === ticketId ? false : true;
+      //   return ans;      
+
+      // });
 
       ticketElement.remove();
 
