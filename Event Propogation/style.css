@@ -2,12 +2,18 @@
   background-color: red;
   height: 17rem;
   width: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .parent {
   background-color: green;
   height: 13rem;
   width: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .child {
