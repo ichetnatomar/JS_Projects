@@ -2,19 +2,35 @@ const childElement = document.querySelector('.child');
 const parentElement = document.querySelector('.parent');
 const grandParentElement = document.querySelector('.grandparent');
 
-//How to stop Event Propogation?
-//On clicking child, you only want child and then parent 's event to be triggered, and STOP after that, not propogate it any further..
-//Use event.stopPropogation() at the last stop.
+//How to stop Event Propogation incase of Event Trickling/capturing?
+//On clicking child, you want grandparent and parent event to be tricggered, but not child's.
+// Add stopPrpogation() at the parent.
 
 
+//Grandparent and Child
+// grandParentElement.addEventListener('click', () => console.log('grand parent clicked'), true); //gets executed
 
-childElement.addEventListener('click', () => console.log('child clicked'));
+// //add stopPropogation() here
+// parentElement.addEventListener('click', (e) => {   //gets executed but then event stops trickling downwards
+//   console.log('parent clicked');
+// }, false
+// );
 
-//add stopPropogation() here
-parentElement.addEventListener('click', (e) => {
+// childElement.addEventListener('click', (e) => {
+//   console.log('child clicked');
+//   e.stopPropagation();
+// }, true);
+
+//Child and Grandparent is NOT POSSIBLE
+grandParentElement.addEventListener('click', () => {
+  console.log('grandparent clicked');
+}, false);
+
+parentElement.addEventListener('click', () => {
   console.log('parent clicked');
-  e.stopPropagation();
-}
-);
+}, false);
 
-grandParentElement.addEventListener('click', () => console.log('grand parent clicked'));
+childElement.addEventListener('click', () => {//target
+  console.log('child clicked');
+
+}, true);
