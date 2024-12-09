@@ -1,7 +1,9 @@
 //on clicking the plus button, it should increment value by 1
 const addBtnElement = document.querySelector('#add-btn');
 let countElement = document.querySelector('#count');
+const resetBtn = document.querySelector('#reset');
 const subtractBtnElement = document.querySelector('#subtract-btn');
+
 
 
 console.log(countElement.innerText);
@@ -19,6 +21,10 @@ subtractBtnElement.addEventListener('click', () => {
   console.log(currCountValue);
   currCountValue--;
   countElement.innerText = currCountValue;
+})
+
+resetBtn.addEventListener('click', () => {
+  countElement.innerText = '0';
 })
 
 
