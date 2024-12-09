@@ -5,8 +5,6 @@ const resetBtn = document.querySelector('#reset');
 const subtractBtnElement = document.querySelector('#subtract-btn');
 
 
-
-console.log(countElement.innerText);
 addBtnElement.addEventListener('click', () => {
 
   let currCountValue = countElement.innerText;
@@ -18,9 +16,12 @@ addBtnElement.addEventListener('click', () => {
 
 subtractBtnElement.addEventListener('click', () => {
   let currCountValue = countElement.innerText;
-  console.log(currCountValue);
+  
+  if(currCountValue > 0){    
   currCountValue--;
   countElement.innerText = currCountValue;
+  }
+  
 })
 
 resetBtn.addEventListener('click', () => {
