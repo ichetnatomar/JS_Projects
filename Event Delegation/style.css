@@ -1,4 +1,30 @@
-.products{
-  font-size: 1.4rem;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
+#color-cont {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 15rem;
+}
+
+.color {
+  height: 15rem;
+  width: 15rem;
+}
+
+#red {
+  background-color: red;
+}
+
+#green {
+  background-color: green;
+}
+
+#yellow {
+  background-color: yellow;
+}

@@ -1,5 +1,13 @@
-const categoriesElement = document.querySelector('#categories');
+const colorsElement = document.querySelector('#color-cont');
+const bodyElement = document.querySelector('body');
 
-categoriesElement.addEventListener('click', (e) => {
-  console.log(e.target.parentElement.querySelector('h1').innerText);
+colorsElement.addEventListener('click', (e) => {
+
+  const color = e.target.id;
+  e.target.parentElement.children[0].style.backgroundColor = color;
+  e.target.parentElement.children[1].style.backgroundColor = color;
+  e.target.parentElement.children[2].style.backgroundColor = color;
+  bodyElement.style.backgroundColor = color;
+
 })
+
