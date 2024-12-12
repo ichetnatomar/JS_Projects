@@ -1,0 +1,90 @@
+* {
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: antiquewhite;
+}
+
+header {
+  /* border: 2px solid blue; */
+  margin-top: 3rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #311c00;
+}
+
+span {
+  font-size: 1.5rem;
+
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-cont {
+  background-color: aliceblue;
+  padding: 0.7rem;
+  margin: 0.5rem;
+  width: 50rem;
+  border-radius: 0.5rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.question {
+  margin-bottom: 0.4rem;
+}
+
+.option {
+  display: flex;
+  margin: 0.2rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  /* Add a transparent border */
+  transition: all 0.3s ease;
+  /*apply transition to all changeable properties*/
+}
+
+.option:hover {
+  background-color: #f0f0f0;
+  border-color: #ddd;
+  /* Make border visible on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.question-cont:hover {
+  background-color: #f0f0f0;
+  /* Optional: add background change */
+  transform: translateY(-5px);
+  /* Optional: lifting effect */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  /* Optional: shadow */
+}
+
+input {
+  display: block;
+  cursor: pointer;
+}
+
+label {
+  padding-left: 0.3rem;
+  cursor: pointer;
+}
