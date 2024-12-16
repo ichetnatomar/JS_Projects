@@ -1,19 +1,64 @@
-const searchBar = document.querySelector('#search-bar');
+// const searchBar = document.querySelector('#search-bar'); //SearchBar element
+// let timerID;
 
-searchBar.addEventListener('input', () => {
-  const itemSearched = searchBar.value;
-  hitAPI(itemSearched);
-})
-function hitAPI(itemSearched) {
-  console.log(`API call to ${itemSearched}`)
-};
+// //API call function
+// searchAPI = (itemToBeSearched) => {  
+//   console.log(`Searching for ${itemToBeSearched}`); 
+// }
+
+// //Debounce function
+// function debounce(itemToBeSearched, searchAPI, delay) {
+//     clearTimeout(timerID); //clear out old timer
+
+//     timerID = setTimeout(() => { //reset to a new fresh timer
+//       searchAPI(itemToBeSearched); //if input is delayed by 3s, call searchAPI
+//     }, delay);
+// }
+
+// //Event listener for the search bar
+// searchBar.addEventListener('input', () => {
+//     const itemToBeSearched = searchBar.value;
+//     debounce(itemToBeSearched, searchAPI, 3000);  //search for itemToBeSearched  using searchAPI, debounce with a 3s delay. 
+//   }
+// );
 
 
 
 
-//for each letter entered a separate API call is made, this increases load  on the API, increases expenditure(incase API is paid), and degrades the app's overall performance.
+//Using CLOSURE FUNCTION inside Debounce()
 
-// Solution: 
-    // 1. DEBOUNCING: Ssetup a times that starts after uses pauses typing, if times is complete, assume user has provided final input, and then hit API. else if user restars typing beofre timer, reset timer and wait till user pauses next.
+const searchBar = document.querySelector('#search-bar'); //SearchBar element
 
 
+
+//API call function
+searchAPI = (itemToBeSearched) => {
+  console.log(`Searching for ${itemToBeSearched}`);
+}
+
+const debouncedAPI = debounce(searchAPI, 3000); //closure function is caught here in variable 
+// console.log(debouncedAPI); 
+
+//Debounce function
+function debounce(searchAPI, delay) {
+
+  let timerID; //initially it is undefined
+
+  return function (e) {
+
+    console.log('timer', timerID);
+
+    clearTimeout(timerID);
+
+    const query = e.target.value; //value to be searched 
+
+    timerID = setTimeout(() => {
+      searchAPI(query); //call searchAPI after delay
+    }, delay);
+  }
+
+}
+
+
+//Event listener for the search bar
+searchBar.addEventListener('input', debouncedAPI); //search using searchAPI, debounce with a 3s delay.
