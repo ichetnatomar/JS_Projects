@@ -40,7 +40,7 @@ console.log(ans);
 
 
 
-//Reduce Polyfill
+//Reduce
 
 //add all elements of nums
 
@@ -49,18 +49,24 @@ console.log('sum of array is: ' + total);
 
 //reduce polyfill
 
-let callbackSum = (sum, currentVal) => sum + currentVal;
+let callbackSum = (sum, currentVal) => sum * currentVal;
 
-Array.prototype.myReduce = function (callbackSum) {
+Array.prototype.myReduce = function (callbackSum, initialValue) {
 
-  let sum = 0;
+  let sum = initialValue;  //assuming that user provides accumulator's initial value
+  let startIdx = 0;
 
-  for (let x = 0; x < this.length; x++) {
-    sum = callbackSum(sum, this[x]);
+  if (arguments.length == 1) {  //if initial value for accumulator is not provided by user, and arguements[] length = 1
+    sum = this[0]; //first element of array
+    startIdx = 1; //start from second index
   }
 
+  for (let x = startIdx; x < this.length; x++) {
+    sum = callbackSum(sum, this[x]);
+  }
   return sum;
+
 }
 
-let total2 = nums.myReduce(callbackSum);
+let total2 = nums.myReduce(callbackSum, 1);
 console.log('sum of array using reduce polyfill: ' + total2);
