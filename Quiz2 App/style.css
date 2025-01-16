@@ -2,12 +2,14 @@
   border: 0;
   margin: 0;
   box-sizing: border-box;
+  overflow: auto;
   overflow-x: hidden;
   font-family: 'Poppins', sans-serif;
 }
 
 body {
-  height: 100vh;
+  min-height: 140vh;
+  /* done to force scrolling up after all questions attempted */
   width: 100vw;
   background-color: antiquewhite;
 }
@@ -24,7 +26,6 @@ header {
 
 span {
   font-size: 1.5rem;
-
 }
 
 main {
@@ -70,6 +71,7 @@ main {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
+
 .question-cont:hover {
   background-color: #f0f0f0;
   /* Optional: add background change */
@@ -87,4 +89,61 @@ input {
 label {
   padding-left: 0.3rem;
   cursor: pointer;
+}
+
+/* Score Board */
+.result {
+  width: 20rem;
+  height: auto;
+  background-color: coral;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #401100;
+  border-radius: 0.4rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  /* Ensure it appears above other content */
+}
+
+.hide {
+  display: none;
+  /*Hide scoreboard initially*/
+}
+
+
+.user-score {
+  font-size: 1.2rem;
+  padding: 1rem;
+}
+
+.user-score>* {
+  font-size: inherit
+}
+
+#try-again {
+  border-top: 2px solid #401100;
+  width: 100%;
+  padding: 1rem;
+  font-size: inherit;
+  transition: all 0.12s ease;
+}
+
+#try-again:hover {
+  cursor: pointer;
+  background-color: #311c00;
+  color: #ddd;
+}
+
+.hide {
+  display: none;
+}
+
+#film{
+  height: 100vh;
+  width: 100vw;;
+  background-color: black;
+  position: fixed;
+  z-index: 9;
 }

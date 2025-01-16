@@ -1,0 +1,64 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 150vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+header p {
+  margin-top: -0.2rem;
+  font-size: 1.3rem;
+}
+
+.question {
+  border-radius: 1rem;
+  width: 55rem;
+  margin-bottom: 0.4rem;
+  background-color: antiquewhite;
+  padding: 1rem;
+}
+
+.option {
+  margin-left: 1rem;
+  margin-top: 0.4rem;
+}
+
+input : :hover{
+  cursor: pointer;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+.option:hover {
+  cursor: pointer;
+}
+
+#submit-btn {
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  width: 10rem;
+  font-size: 1.3rem;
+  position: relative;
+  left: 42%;
+  padding: 0.7rem;
+}

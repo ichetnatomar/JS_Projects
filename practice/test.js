@@ -1,21 +1,17 @@
-const arr = [1, 2, 3, 4, 5];
-let sum = arr.reduce((accumulator, curr) => accumulator + curr, 0);
-console.log(sum);
+// 'use strict';
 
-const items = [
-  {
-    name: 'pen',
-    price: 10,
-  },
-  {
-    name: 'pencil',
-    price: 20,
-  },
-  {
-    name: 'bag',
-    price: 30,
+function sayHello() {
+  console.log(`${this} says hi`);
+}
+
+const car = {
+  make: "Toyota",
+  fn: function () {
+    function f2() {
+      console.log(`${this}`);
+    }
+    f2();
   }
-];
+};
 
-sum = items.reduce((accumulator, currItem) => accumulator + currItem.price, 0);
-console.log(sum);
+car.fn();
