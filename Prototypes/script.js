@@ -22,3 +22,74 @@ const car1 = {
 
 car1.message();
 car1.message2();
+
+// *************************************************************************************************************************************************
+
+
+// Constructor Functions
+
+function Person(name, age) {
+  this.age = age;
+  this.name = name;
+}
+
+Person.prototype.greet = () => {
+  console.log(`I am ${this.name}, age is ${this.age}`);
+}
+Person.prototype.greet2 = function () {
+  console.log(`I am ${this.name}, age is ${this.age}`);
+}
+
+const person1 = new Person("John", "10");
+person1.greet();
+person1.greet2();
+
+const person2 = Object.create(Person.prototype);
+person2.name = "Jerry";
+person2.age = 20;
+person2.greet();
+person2.greet2();
+
+
+// *************************************************************************************************************************************************
+
+
+//print object details
+const doAnything = ()=>{
+  console.log('hello');
+}
+console.dir(Person);
+console.dir(doAnything);
+
+
+
+// *************************************************************************************************************************************************
+
+
+var x = 5;
+function outer(){
+  function inner(){
+    console.log(x);
+  }
+  var x = 10;
+  inner();
+}
+outer();
+// O/P: 10
+
+// *************************************************************************************************************************************************
+
+
+function add(x,y){
+  return (x+y);
+}
+console.log(add(2,3,4));
+
+//O/P: 5
+
+
+// *************************************************************************************************************************************************
+
+
+
+
