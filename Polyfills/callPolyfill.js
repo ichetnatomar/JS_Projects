@@ -30,6 +30,8 @@ Function.prototype.myCall = function(context = {}, ...args){
     //call function and store returned value in variable
     const ans = context[symbol](...args);
 
+  
+
     //perform cleanup:remove added function prperty from context 
     delete context[symbol];
 
@@ -40,3 +42,8 @@ Function.prototype.myCall = function(context = {}, ...args){
 
 printDetails.myCall(person1);
 printDetails.myCall(1);
+
+
+
+console.log(Object.getOwnPropertySymbols(person1)); // to retrieve Symbol() properties of an object
+
