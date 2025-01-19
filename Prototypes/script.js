@@ -55,7 +55,7 @@ person2.greet2();
 
 
 //print object details
-const doAnything = ()=>{
+const doAnything = () => {
   console.log('hello');
 }
 console.dir(Person);
@@ -67,8 +67,8 @@ console.dir(doAnything);
 
 
 var x = 5;
-function outer(){
-  function inner(){
+function outer() {
+  function inner() {
     console.log(x);
   }
   var x = 10;
@@ -80,15 +80,33 @@ outer();
 // *************************************************************************************************************************************************
 
 
-function add(x,y){
-  return (x+y);
+function add(x, y) {
+  return (x + y);
 }
-console.log(add(2,3,4));
+console.log(add(2, 3, 4));
 
 //O/P: 5
 
 
 // *************************************************************************************************************************************************
+
+
+
+
+
+function Dog(name) {
+  this.name = name;
+}
+console.dir(Dog);
+Dog.prototype.printDetails = function () {
+  console.log(`${this.name} says woof!`);
+}
+
+console.dir(Dog);
+
+const dog = new Dog('Leo');
+dog.printDetails();
+
 
 
 
