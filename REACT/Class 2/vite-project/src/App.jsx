@@ -2,11 +2,39 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Navbar from "./components/Navbar"
+import Navbar from './components/Navbar'
+import Card from './components/Card'
+
 
 function App() {
+  const cardData = [
+    {
+      title: "Laptops",
+      description: "Macbook Air"
+    },
+    {
+      title: "Shoes",
+      description: "Adidas"
+    },
+    {
+      title: "Appliances",
+      description: "Bajaa Juicer"
+    },
+    {
+      title: "Clothes",
+      description: "Jockey tshirt"
+    }
+  ];
   return <>
-    <Navbar />
+    <Navbar/>
+    <div style = {{display:'flex', justifyContent:'space-evenly'}}>
+      {
+        cardData.map((item)=>{
+          return <Card key = {item.title} cardTitle = {item.title} cardDescription= {item.description}/>
+        })
+      }
+    </div>
+  
   </>;
 
 }
