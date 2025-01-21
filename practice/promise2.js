@@ -26,7 +26,7 @@ function getWeather() {
   });
 }
 
-//normal then() catch() and finally(), AVOID it since this way of promise handling becomes complex with increased number of promises
+//normal then() cathc() and finally(), AVOID it since this way of promise handling becomes complex with increased number of promises
 // getWeather().then((data) => { console.log(data) }).catch((err) => { console.log(err) }).finally(() => { console.log('completed.') });
 
 //g for this methos of asyn await for handling promises, it makes code readable and easy debuggable
@@ -44,3 +44,9 @@ async function getResult() {
 getResult();
 
 console.log('Gets executed first!');
+
+// O/P 
+// anything before await gets executed synchronously'
+// 'Gets executed first!');
+// after await
+// weather is good 
