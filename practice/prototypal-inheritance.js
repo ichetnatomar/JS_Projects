@@ -45,3 +45,6 @@ carPrototype.carDetails2 = function () {
 
 car1.carDetails2(); //type: Sedan
 //all objects shared same prototype object, no new protype is created. That is why changes made to the Prototype Object reflect to all objects' prototype because they all are pointing to that same prototype object only.
+
+
+

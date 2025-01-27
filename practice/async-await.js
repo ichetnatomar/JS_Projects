@@ -24,3 +24,33 @@ async function handlePromise() {
 }
 handlePromise();
 
+
+
+
+
+console.log('start');
+
+setTimeout(() => { console.log('settimeout callback') }, 1000);
+
+function createPromise() {
+  console.log('createPromise fn called');
+  return new Promise((resolve, reject) => {
+    console.log('Inside promise executor fn');
+    setTimeout(
+      () => {
+        resolve('promise fulfilled')
+      }
+      , 1000);
+  });
+}
+
+async function fulfilPromise() {
+  console.log('fulfilPromise fn called');
+  const data = await createPromise();
+  console.log(data);
+  console.log('after createPromisefn called');
+}
+
+fulfilPromise();
+console.log('end');
+
