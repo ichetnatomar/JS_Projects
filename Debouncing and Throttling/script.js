@@ -1,64 +1,29 @@
-// const searchBar = document.querySelector('#search-bar'); //SearchBar element
-// let timerID;
+//generic debounce function that debounces a callback for given delay
+function debounce(callback, delay) {
 
-// //API call function
-// searchAPI = (itemToBeSearched) => {  
-//   console.log(`Searching for ${itemToBeSearched}`); 
-// }
+  let timerId;
 
-// //Debounce function
-// function debounce(itemToBeSearched, searchAPI, delay) {
-//     clearTimeout(timerID); //clear out old timer
-
-//     timerID = setTimeout(() => { //reset to a new fresh timer
-//       searchAPI(itemToBeSearched); //if input is delayed by 3s, call searchAPI
-//     }, delay);
-// }
-
-// //Event listener for the search bar
-// searchBar.addEventListener('input', () => {
-//     const itemToBeSearched = searchBar.value;
-//     debounce(itemToBeSearched, searchAPI, 3000);  //search for itemToBeSearched  using searchAPI, debounce with a 3s delay. 
-//   }
-// );
-
-
-
-
-//Using CLOSURE FUNCTION inside Debounce()
-
-const searchBar = document.querySelector('#search-bar'); //SearchBar element
-
-
-
-//API call function
-searchAPI = (itemToBeSearched) => {
-  console.log(`Searching for ${itemToBeSearched}`);
-}
-
-const debouncedAPI = debounce(searchAPI, 3000); //closure function is caught here in variable 
-// console.log(debouncedAPI); 
-
-//Debounce function
-function debounce(searchAPI, delay) {
-
-  let timerID; //initially it is undefined
-
-  return function (e) {
-
-    console.log('timer', timerID);
-
-    clearTimeout(timerID);
-
-    const query = e.target.value; //value to be searched 
-
-    timerID = setTimeout(() => {
-      searchAPI(query); //call searchAPI after delay
+  return function (query) {
+    clearTimeout(timerId); //derlete old timer
+    timerId = setTimeout(() => { //start new timer, if it crosses the given delay(2s here), fire the callback!!
+      callback(query);
     }, delay);
-  }
+  };
 
 }
 
+//searchAPI callback
+function searchAPI(query) {
+  console.log('API hit to search for: ', query);
+}
 
-//Event listener for the search bar
-searchBar.addEventListener('input', debouncedAPI); //search using searchAPI, debounce with a 3s delay.
+//mapping generice debounce() with specific searchAPI callback and delay
+let debouncSearchAPI = debounce(searchAPI, 2000);
+
+
+const searchElement = document.querySelector('#search-bar');
+
+searchElement.addEventListener('input', (e) => {
+  const query = e.target.value;
+  debouncSearchAPI(query);
+});
