@@ -21,11 +21,11 @@ const Counter2 = () => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h1>Simple Counter</h1>
       <div style={{ display: 'flex' }}>
-        <button onClick={increment} className='counter-btn' style={{ marginRight: '2rem' }}>+</button>
+        <button onClick={() => { setCount(count + 1) }} className='counter-btn' style={{ marginRight: '2rem' }}>+</button>
         <h2>{count}</h2>
-        <button onClick={decrement} className='counter-btn' style={{ marginLeft: '2rem' }}>-</button>
+        <button onClick={() => { setCount(Math.max(count - 1, 0)) }} className='counter-btn' style={{ marginLeft: '2rem' }}>-</button>
       </div>
-      <button onClick={reset} style={{ cursor: 'pointer' }}>Reset</button>
+      <button onClick={() => { setCount(0) }} style={{ cursor: 'pointer' }}>Reset</button>
     </div>
 
   )

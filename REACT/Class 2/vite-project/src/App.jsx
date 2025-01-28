@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Card from './components/Card'
 import Card2 from './components/Counter2'
 import Counter2 from './components/Counter2'
+import Form from './components/Form'
 
 
 function App() {
@@ -28,18 +29,21 @@ function App() {
     }
   ];
   return <>
-    <Navbar />
+    {/* <Navbar /> */}
 
-    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+    {/* <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
       {
         cardData.map((item) => {
           return <Card key={item.title} cardTitle={item.title} cardDescription={item.description} />
         })
       }
-    </div>
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    </div> */}
+
+    {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
       <Counter2 />
-    </div>
+    </div> */}
+
+    <Form />
 
 
   </>;
