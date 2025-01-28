@@ -4,6 +4,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar'
 import Card from './components/Card'
+import Card2 from './components/Counter2'
+import Counter2 from './components/Counter2'
 
 
 function App() {
@@ -26,15 +28,20 @@ function App() {
     }
   ];
   return <>
-    <Navbar/>
-    <div style = {{display:'flex', justifyContent:'space-evenly'}}>
+    <Navbar />
+
+    <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
       {
-        cardData.map((item)=>{
-          return <Card key = {item.title} cardTitle = {item.title} cardDescription= {item.description}/>
+        cardData.map((item) => {
+          return <Card key={item.title} cardTitle={item.title} cardDescription={item.description} />
         })
       }
     </div>
-  
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Counter2 />
+    </div>
+
+
   </>;
 
 }

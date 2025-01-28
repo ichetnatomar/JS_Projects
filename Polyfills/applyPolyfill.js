@@ -38,3 +38,18 @@ const ans = printDetails.myApply(person, [['singing', 'dancing', 'sleeping']]); 
 
 console.log(printDetails.myApply(1, [hobbies])); //I am undefined, age is undefined. My hobbies are: swimming,badminton,gymming
 
+function Cars(name, model){
+  this.name = name;
+  this.model = model;
+}
+
+Cars.prototype.getDetails = function(){
+  console.log(`this is ${this.name}, make is ${this.model}`);
+}
+
+const car1 = Object.create(Cars.prototype);
+car1.name = 'BMW';
+car1.model = 2025;
+console.log(car1);
+
+// const car2 = Object.create()
