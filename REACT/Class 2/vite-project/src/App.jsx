@@ -7,6 +7,8 @@ import Card from './components/Card'
 import Card2 from './components/Counter2'
 import Counter2 from './components/Counter2'
 import Form from './components/Form'
+import Todo from './components/Todo'
+import InputBox from './components/InputBox'
 
 
 function App() {
@@ -43,7 +45,9 @@ function App() {
       <Counter2 />
     </div> */}
 
-    <Form />
+    {/* <Form /> */}
+
+    <InputBox/>
 
 
   </>;
